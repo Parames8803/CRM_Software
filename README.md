@@ -1,4 +1,4 @@
-# Fullstack Team Management (MERN)
+# Team Management (MERN)
 
 ### 
 ## **Admin Features:**
