@@ -15,6 +15,7 @@ import Loading from "../components/Loader";
 import UserInfo from "../components/UserInfo";
 import { useGetDashboardStatsQuery } from "../redux/slices/api/taskApiSlice";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 const TaskTable = ({ tasks }) => {
   const ICONS = {
@@ -148,7 +149,6 @@ const UserTable = ({ users }) => {
 };
 const Dashboard = () => {
   const { data, isLoading, error } = useGetDashboardStatsQuery();
-
   if (isLoading) {
     return (
       <div className="py-10">
@@ -156,6 +156,7 @@ const Dashboard = () => {
       </div>
     );
   }
+
   const totals = data?.tasks;
   const stats = [
     {
