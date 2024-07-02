@@ -3,6 +3,7 @@ import ModalWrapper from "./ModalWrapper";
 import { Dialog } from "@headlessui/react";
 import { MdOutlineCancel } from "react-icons/md";
 import { useForm } from "react-hook-form";
+import { SiGmail } from "react-icons/si";
 import Textbox from "./Textbox";
 import TextArea from "./TextArea";
 import Button from "./Button";
@@ -49,9 +50,12 @@ const SendMessage = ({ open, setOpen, handler, data }) => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Dialog.Title
               as="h2"
-              className="text-lg font-bold leading-6 text-gray-900 mb-4"
+              className="text-2xl font-bold leading-6 text-gray-900 mb-4 flex justify-center items-center gap-5"
             >
-              Send Message
+              Send Email
+              <span>
+                <SiGmail className="text-blue-800"/>
+              </span>
             </Dialog.Title>
             <div className=" flex flex-col gap-6">
               <Textbox

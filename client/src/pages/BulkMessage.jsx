@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaPhone } from "react-icons/fa6";
+import { IoLogoWhatsapp } from "react-icons/io";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import { MdDelete } from "react-icons/md";
@@ -64,7 +64,7 @@ const BulkMessage = () => {
     setEmails([user]);
   };
 
-  const handlePhoneService = async (user) => {
+  const handleWhatsappService = async (user) => {
     console.log(user);
   };
 
@@ -94,11 +94,16 @@ const BulkMessage = () => {
     <div className="px-5">
       <>
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold text-gray-800">
+          <div className="text-2xl font-bold text-gray-800 w-full">
             Send Bulk Messages
           </div>
-          <div className="py-6">
-            <form action="" method="post" onSubmit={handleFileSubmit}>
+          <div className="py-6 w-full">
+            <form
+              action=""
+              method="post"
+              onSubmit={handleFileSubmit}
+              className="flex justify-end items-center"
+            >
               <input
                 type="file"
                 name="xcel_file"
@@ -107,16 +112,19 @@ const BulkMessage = () => {
               />
               <Button
                 icon={<FaCloudUploadAlt />}
-                className={"text-white bg-gray-800 rounded-lg"}
+                className={
+                  "text-white bg-gray-800 rounded-lg flex justify-center items-center gap-4"
+                }
                 type={"submit"}
+                label={"Upload"}
               />
             </form>
           </div>
         </div>
         {data.length > 0 ? (
           <div>
-            <table className="w-full bg-gray-200 rounded-lg">
-              <thead className="bg-slate-300">
+            <table className="bg-white w-full shadow-md rounded">
+              <thead className="bg-slate-700 text-white">
                 <tr>
                   <th className="py-3 text-lg">S.no</th>
                   <th className="py-3 text-lg">Name</th>
@@ -127,16 +135,19 @@ const BulkMessage = () => {
               </thead>
               <tbody>
                 {data.map((item, index) => (
-                  <tr key={index}>
-                    <td className="py-4 text-base text-center">{index + 1}</td>
-                    <td className="py-4 text-base text-center">{item.name}</td>
-                    <td className="py-4 text-base text-center">{item.phone}</td>
-                    <td className="py-4 text-base text-center">{item.email}</td>
-                    <td className="py-4 text-base text-center flex justify-around items-center">
-                      <FaPhone
-                        className="text-blue-500 cursor-pointer"
+                  <tr
+                    key={index}
+                    className="text-black border-solid border-b-2 border-black-300"
+                  >
+                    <td className="py-3 px-5 text-center">{index + 1}</td>
+                    <td className="py-3 px-5 text-center">{item.name}</td>
+                    <td className="py-3 px-5 text-center">{item.phone}</td>
+                    <td className="py-3 px-5 text-center">{item.email}</td>
+                    <td className="py-3 px-5 text-center text-sm flex justify-around items-center">
+                      <IoLogoWhatsapp
+                        className="text-green-500 cursor-pointer"
                         onClick={() => {
-                          handlePhoneService(item);
+                          handleWhatsappService(item);
                         }}
                       />
                       <SiGmail

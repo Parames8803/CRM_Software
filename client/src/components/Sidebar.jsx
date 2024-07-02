@@ -7,7 +7,8 @@ import {
   MdTaskAlt,
 } from "react-icons/md";
 import { SiGooglemessages } from "react-icons/si";
-import { FaTasks, FaTrashAlt, FaUsers } from "react-icons/fa";
+import { PiPaperPlaneTiltFill } from "react-icons/pi";
+import { FaTasks, FaTrashAlt, FaUsers, FaList } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { setOpenSidebar } from "../redux/slices/authSlice";
@@ -53,6 +54,11 @@ const linkData = [
     label: "Trash",
     link: "trashed",
     icon: <FaTrashAlt />,
+  },
+  {
+    label: "Proposals",
+    link: "proposals",
+    icon: <PiPaperPlaneTiltFill />,
   },
 ];
 

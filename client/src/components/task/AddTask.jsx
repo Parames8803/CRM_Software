@@ -40,6 +40,7 @@ const AddTask = ({ open, setOpen, task }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues });
+  
   const [team, setTeam] = useState(task?.team || []);
   const [stage, setStage] = useState(task?.stage?.toUpperCase() || LISTS[0]);
   const [priority, setPriority] = useState(

@@ -15,6 +15,9 @@ import Users from "./pages/Users";
 import Dashboard from "./pages/dashboard";
 import { setOpenSidebar } from "./redux/slices/authSlice";
 import BulkMessage from "./pages/BulkMessage";
+import Proposals from "./pages/Proposals";
+import ProposalDetails from "./components/ProposalDetails";
+import AddProposal from "./components/AddProposal";
 
 function Layout() {
   const { user } = useSelector((state) => state.auth);
@@ -108,12 +111,15 @@ function App() {
           <Route path="/trashed" element={<Trash />} />
           <Route path="/bulk_message" element={<BulkMessage />} />
           <Route path="/task/:id" element={<TaskDetails />} />
+          <Route path="/proposals" element={<Proposals />} />
+          <Route path="/proposals/:id" element={<ProposalDetails />} />
+          <Route path="/proposals/add_proposal" element={<AddProposal />} />
         </Route>
 
         <Route path="/log-in" element={<Login />} />
       </Routes>
 
-      <Toaster richColors />
+      <Toaster richColors position="top-center" />
     </main>
   );
 }
