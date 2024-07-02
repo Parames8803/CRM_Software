@@ -200,9 +200,7 @@ export const dashboardStatistics = async (req, res) => {
 export const getTasks = async (req, res) => {
   try {
     const { stage, isTrashed } = req.query;
-
     let query = { isTrashed: isTrashed ? true : false };
-
     if (stage) {
       query.stage = stage;
     }
@@ -282,7 +280,7 @@ export const updateTask = async (req, res) => {
     const { id } = req.params;
     const { title, date, team, stage, priority, assets } = req.body;
 
-    const task =  await Task.findById(id);
+    const task = await Task.findById(id);
 
     task.title = title;
     task.date = date;

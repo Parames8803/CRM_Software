@@ -16,13 +16,13 @@ export const followUserController = {
             interest: x.Interest,
           });
           createdUsers.push(user);
-          res.status(201).json({
-            status: true,
-            message: "Follow up users uploaded successfully",
-            createdUsers: createdUsers,
-          });
         }
       }
+      res.status(201).json({
+        status: true,
+        message: "Follow up users uploaded successfully",
+        createdUsers: createdUsers,
+      });
     } catch (error) {
       console.log(error);
       res.status(400).json({ status: false, message: error.message });
@@ -31,7 +31,9 @@ export const followUserController = {
 
   getAll: async (req, res) => {
     try {
-      const users = await FollowUser.find().select("name email phone interest");
+      const users = await FollowUser.find({ deletedAt: null }).select(
+        "name email phone interest"
+      );
       res.status(200).json(users.length > 0 ? users : []);
     } catch (error) {
       console.log(error);
@@ -42,7 +44,7 @@ export const followUserController = {
   deleteUser: async (req, res) => {
     try {
       const id = req.params.id;
-      await FollowUser.deleteOne({ _id: id });
+      await FollowUser.updateOne({ _id: id }, { deletedAt: Date.now() });
       res.status(200).json({ status: true, message: "User deleted Success" });
     } catch (error) {
       console.log(error);
@@ -56,7 +58,9 @@ export const followUserController = {
       const subject = req.body.emailData.subject;
       const text = req.body.emailData.body;
       const result = await sendEmail(to, subject, text);
-      res.status(200).json({ message: "Email sent Successfully" });
+      res
+        .status(200)
+        .json({ status: true, message: "Email sent Successfully" });
     } catch (error) {
       console.log(error);
       return res.status(400).json({ status: false, message: error.message });
