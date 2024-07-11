@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://dashing-pudding-3f0d09.netlify.app/"],
+    origin: ["https://dashing-pudding-3f0d09.netlify.app"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
