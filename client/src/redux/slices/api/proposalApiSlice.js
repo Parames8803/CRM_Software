@@ -41,6 +41,14 @@ const proposalApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    // handlePrintPDF: builder.mutation({
+    //   query: (data) => ({
+    //     url: `${PROPOSAL_URL}/print`,
+    //     method: "POST",
+    //     body: data,
+    //     credentials: "include",
+    //   }),
+    // }),
   }),
 });
 
@@ -50,4 +58,5 @@ export const {
   useGetProposalsQuery,
   useDeleteProposalMutation,
   useToggleProposalStatusMutation,
+  // useHandlePrintPDFMutation,
 } = proposalApiSlice;
