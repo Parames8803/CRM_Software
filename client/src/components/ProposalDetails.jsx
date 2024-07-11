@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom";
 import {
   useDeleteProposalMutation,
   useGetProposalByIdQuery,
-  // useHandlePrintPDFMutation,
+  useHandlePrintPDFMutation,
 } from "../redux/slices/api/proposalApiSlice";
 import Loading from "./Loader";
 import { formatDate } from "../helpers/formatDate.js";
 import { toast } from "sonner";
+import axios from "axios";
 
 const ProposalDetails = () => {
   const { id } = useParams();
@@ -21,7 +22,7 @@ const ProposalDetails = () => {
     refetch,
   } = useGetProposalByIdQuery(id);
   const [deleteProposal] = useDeleteProposalMutation();
-  // const [printProposal] = useHandlePrintPDFMutation();
+  const [printProposal] = useHandlePrintPDFMutation();
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -30,14 +31,49 @@ const ProposalDetails = () => {
     }
   }, [proposalData]);
 
-  // const handleProposalPrint = async (data) => {
-  //   let res = await printProposal(data).unwrap();
-  //   if (res.status) {
-  //     toast.success("");
-  //   } else {
-  //     toast.warning("Something went wrong");
-  //   }
-  // };
+  const handleDownload = async () => {
+    try {
+      const response = await axios({
+        method: "POST",
+        url: "http://localhost:8800/api/proposals/download",
+        responseType: "blob",
+        withCredentials: true,
+      });
+
+      // Create a blob URL for the blob
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      // Create a temporary anchor element
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = "proposal.pdf";
+
+      // Append anchor to the body, click it, and remove it immediately
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // Revoke the blob URL to free up resources
+      window.URL.revokeObjectURL(blobUrl);
+
+      console.log("PDF downloaded successfully");
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+      alert("Failed to download PDF");
+    }
+  };
+
+  const handleProposalPrint = async (data) => {
+    let res = await printProposal(data).unwrap();
+    console.log(res);
+    if (res.status) {
+      // make download action
+      handleDownload();
+    } else {
+      toast.warning("Something went wrong");
+    }
+  };
 
   const removeProposal = async (id) => {
     const res = await deleteProposal(id);
@@ -79,9 +115,9 @@ const ProposalDetails = () => {
                   <div className="flex justify-end gap-2">
                     <Button
                       label="Print"
-                      // onClick={() => {
-                      //   handleProposalPrint(data);
-                      // }}
+                      onClick={() => {
+                        handleProposalPrint(data);
+                      }}
                       icon={<MdLocalPrintshop className="text-lg" />}
                       className="bg-blue-600 flex flex-row-reverse gap-1 items-center text-white rounded-md 2xl:py-2 text-sm"
                     />

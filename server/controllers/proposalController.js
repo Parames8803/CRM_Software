@@ -1,8 +1,10 @@
 import Lead from "../models/lead.js";
 import Product from "../models/Product.js";
 import Proposal from "../models/proposal.js";
-// import { generateProposal } from "../utils/generateProposal.js";
+import { generateProposal } from "../utils/generateProposal.js";
 import { generateRandomId } from "../utils/randomId.js";
+import path from "path";
+import fs from "fs";
 
 export const createProposal = async (req, res) => {
   try {
@@ -162,19 +164,44 @@ export const toggleProposalStatus = async (req, res) => {
   }
 };
 
-// export const handleProposalPrintPDF = async (req, res) => {
-//   try {
-//     const { data } = req.body;
-//     const result = await generateProposal(data);
-//     if (result) {
-//       res.status(200).json({ status: true, message: "Success" });
-//     } else {
-//       res.status(400).json({ status: false, message: "Failed" });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     return res
-//       .status(500)
-//       .json({ status: false, message: "Something went wrong" });
-//   }
-// };
+export const handleProposalPrintPDF = async (req, res) => {
+  try {
+    const result = await generateProposal(req.body);
+    if (result) {
+      res.status(200).json({ status: true, message: "Success" });
+    } else {
+      res.status(400).json({ status: false, message: "Failed" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ status: false, message: "Something went wrong" });
+  }
+};
+
+export const handleDownloadPDF = async (req, res) => {
+  try {
+    const filePath = path.join(
+      process.cwd(),
+      "public/proposal_doc",
+      "output.pdf"
+    );
+    if (fs.existsSync(filePath)) {
+      // Set Content-Disposition header to force download
+      res.setHeader("Content-Disposition", "attachment; filename=output.pdf");
+      res.setHeader("Content-Type", "application/pdf");
+
+      // Create a readable stream from the file and pipe it to the response
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } else {
+      res.status(404).send("File not found");
+    }
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ status: false, message: "Something went wrong" });
+  }
+};

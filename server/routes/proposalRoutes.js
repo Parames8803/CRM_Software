@@ -5,7 +5,8 @@ import {
   getProposals,
   deleteProposalById,
   toggleProposalStatus,
-  // handleProposalPrintPDF,
+  handleProposalPrintPDF,
+  handleDownloadPDF,
 } from "../controllers/proposalController.js";
 import { protectRoute } from "../middlewares/authMiddlewave.js";
 const router = express.Router();
@@ -15,6 +16,7 @@ router.get("/", protectRoute, getProposals);
 router.get("/:id", protectRoute, getProposalById);
 router.delete("/:id", protectRoute, deleteProposalById);
 router.post("/switch", protectRoute, toggleProposalStatus);
-// router.post("/print", protectRoute, handleProposalPrintPDF);
+router.post("/print", protectRoute, handleProposalPrintPDF);
+router.post("/download", protectRoute, handleDownloadPDF);
 
 export default router;

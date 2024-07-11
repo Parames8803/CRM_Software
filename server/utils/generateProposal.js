@@ -31,23 +31,23 @@ const compile = async (templateName, data) => {
   return hbs.compile(html)({ data });
 };
 
-// export const generateProposal = async (data) => {
-//   try {
-//     const browser = await puppeteer.launch({
-//       executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
-//     });
-//     const page = await browser.newPage();
-//     const content = await compile("proposal_template", data);
-//     await page.setContent(content);
-//     await page.pdf({
-//       path: "public/proposal_doc/output.pdf",
-//       format: "A4",
-//       printBackground: true,
-//     });
-//     await browser.close();
-//     return true;
-//   } catch (error) {
-//     console.error("Error generating proposal:", error);
-//     return false;
-//   }
-// };
+export const generateProposal = async (data) => {
+  try {
+    const browser = await puppeteer.launch({
+      executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    });
+    const page = await browser.newPage();
+    const content = await compile("proposal_template", data);
+    await page.setContent(content);
+    await page.pdf({
+      path: "public/proposal_doc/output.pdf",
+      format: "A4",
+      printBackground: true,
+    });
+    await browser.close();
+    return true;
+  } catch (error) {
+    console.error("Error generating proposal:", error);
+    return false;
+  }
+};
