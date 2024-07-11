@@ -56,7 +56,7 @@ const TaskCard = ({ task }) => {
 
         <div className='w-full border-t border-gray-200 my-2' />
         <div className='flex items-center justify-between mb-2'>
-          <div className='flex items-center gap-3'>
+          {/* <div className='flex items-center gap-3'>
             <div className='flex gap-1 items-center text-sm text-gray-600'>
               <BiMessageAltDetail />
               <span>{task?.activities?.length}</span>
@@ -69,7 +69,7 @@ const TaskCard = ({ task }) => {
               <FaList />
               <span>0/{task?.subTasks?.length}</span>
             </div>
-          </div>
+          </div> */}
 
           <div className='flex flex-row-reverse'>
             {task?.team?.map((m, index) => (

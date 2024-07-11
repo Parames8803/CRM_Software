@@ -15,7 +15,7 @@ const proposalSchema = new Schema(
         quantity: { type: Number },
       },
     ],
-    status: { type: String, default: "open" },
+    status: { type: String, default: "Open" },
     totalAmount: { type: Number },
     leadId: { type: Schema.Types.ObjectId, ref: "Lead" },
     deletedAt: { type: Date, default: null },

@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Title from "./Title";
 import Button from "./Button";
 import { MdEdit, MdEmail, MdDelete, MdLocalPrintshop } from "react-icons/md";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   useDeleteProposalMutation,
   useGetProposalByIdQuery,
+  // useHandlePrintPDFMutation,
 } from "../redux/slices/api/proposalApiSlice";
 import Loading from "./Loader";
 import { formatDate } from "../helpers/formatDate.js";
+import { toast } from "sonner";
 
 const ProposalDetails = () => {
   const { id } = useParams();
@@ -19,6 +21,7 @@ const ProposalDetails = () => {
     refetch,
   } = useGetProposalByIdQuery(id);
   const [deleteProposal] = useDeleteProposalMutation();
+  // const [printProposal] = useHandlePrintPDFMutation();
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -26,6 +29,15 @@ const ProposalDetails = () => {
       setData(proposalData.proposal);
     }
   }, [proposalData]);
+
+  // const handleProposalPrint = async (data) => {
+  //   let res = await printProposal(data).unwrap();
+  //   if (res.status) {
+  //     toast.success("");
+  //   } else {
+  //     toast.warning("Something went wrong");
+  //   }
+  // };
 
   const removeProposal = async (id) => {
     const res = await deleteProposal(id);
@@ -66,12 +78,10 @@ const ProposalDetails = () => {
                   </p>
                   <div className="flex justify-end gap-2">
                     <Button
-                      label="Edit"
-                      icon={<MdEdit className="text-lg" />}
-                      className="bg-yellow-600 flex flex-row-reverse gap-1 items-center bg-gray-600 text-white rounded-md 2xl:py-2 text-sm"
-                    />
-                    <Button
                       label="Print"
+                      // onClick={() => {
+                      //   handleProposalPrint(data);
+                      // }}
                       icon={<MdLocalPrintshop className="text-lg" />}
                       className="bg-blue-600 flex flex-row-reverse gap-1 items-center text-white rounded-md 2xl:py-2 text-sm"
                     />
@@ -182,8 +192,8 @@ const ProposalDetails = () => {
               <div className="bg-white px-2 md:px-4 py-4 shadow-md rounded mt-5">
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead className="border-solid border-b-2 border-black-300 bg-slate-700">
-                      <tr className="text-black text-left text-lg text-white">
+                    <thead className="border-solid border-b-2 border-black-300 bg-red-300">
+                      <tr className="text-black text-left text-lg">
                         <th className="py-2 px-5">Product</th>
                         <th className="py-2 px-5">Qty</th>
                         <th className="py-2 px-5">Rate</th>

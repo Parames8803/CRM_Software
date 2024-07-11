@@ -75,19 +75,20 @@ const Users = () => {
 
   const TableHeader = () => (
     <thead className="border-b border-gray-300">
-      <tr className="text-black text-left">
-        <th className="py-2">Full Name</th>
-        <th className="py-2">Title</th>
-        <th className="py-2">Email</th>
-        <th className="py-2">Role</th>
-        <th className="py-2">Active</th>
+      <tr className="text-black border-b bg-red-300">
+        <th className="py-3 text-left px-5">Full Name</th>
+        <th className="py-3">Title</th>
+        <th className="py-3">Email</th>
+        <th className="py-3">Role</th>
+        <th className="py-3">Active</th>
+        <th className="py-3 text-right px-5">Action</th>
       </tr>
     </thead>
   );
 
   const TableRow = ({ user }) => (
-    <tr className="border-b border-gray-200 text-gray-600 hover:bg-gray-400/10">
-      <td className="p-2">
+    <tr className="border-b text-center border-gray-200 text-gray-600 hover:bg-gray-400/10">
+      <td className="px-5">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-blue-700">
             <span className="text-xs md:text-sm text-center">
@@ -114,7 +115,7 @@ const Users = () => {
         </button>
       </td>
 
-      <td className="p-2 flex gap-4 justify-end">
+      <td className="px-5 py-2 flex gap-4 justify-end">
         <Button
           className="text-blue-600 hover:text-blue-500 font-semibold sm:px-0"
           label="Edit"
@@ -134,20 +135,20 @@ const Users = () => {
 
   return (
     <>
-      <div className="w-full md:px-1 px-0 mb-6">
-        <div className="flex items-center justify-between mb-8">
-          <Title title="  Team Members" />
+      <div className="w-full md:px-1 px-0 my-6">
+        <div className="flex items-center justify-between mb-4">
+          <Title title="Team Members" />
           <Button
             label="Add New User"
             icon={<IoMdAdd className="text-lg" />}
-            className="flex flex-row-reverse gap-1 items-center bg-gray-600 text-white rounded-md 2xl:py-2.5"
+            className="flex flex-row-reverse gap-1 items-center bg-cyan-600 text-white 2xl:py-2.5"
             onClick={() => setOpen(true)}
           />
         </div>
 
-        <div className="bg-white px-2 md:px-4 py-4 shadow-md rounded">
-          <div className="overflow-x-auto">
-            <table className="w-full mb-5">
+        <div className="bg-white shadow-md rounded">
+          <div className="overflow-x-auto p-5 bg-white shadow-md">
+            <table className="w-full">
               <TableHeader />
               <tbody>
                 {data?.map((user, index) => (

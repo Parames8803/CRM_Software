@@ -1,6 +1,7 @@
 import Lead from "../models/lead.js";
 import Product from "../models/Product.js";
 import Proposal from "../models/proposal.js";
+// import { generateProposal } from "../utils/generateProposal.js";
 import { generateRandomId } from "../utils/randomId.js";
 
 export const createProposal = async (req, res) => {
@@ -144,3 +145,36 @@ export const deleteProposalById = async (req, res) => {
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const toggleProposalStatus = async (req, res) => {
+  try {
+    const { id, status } = req.body;
+    let data = await Proposal.findOne({ _id: id, deletedAt: null });
+    if (status == "Open") data.status = "Gain";
+    if (status == "Gain") data.status = "Open";
+    data.save();
+    return res
+      .status(200)
+      .json({ status: true, message: "Proposal updated successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+// export const handleProposalPrintPDF = async (req, res) => {
+//   try {
+//     const { data } = req.body;
+//     const result = await generateProposal(data);
+//     if (result) {
+//       res.status(200).json({ status: true, message: "Success" });
+//     } else {
+//       res.status(400).json({ status: false, message: "Failed" });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     return res
+//       .status(500)
+//       .json({ status: false, message: "Something went wrong" });
+//   }
+// };

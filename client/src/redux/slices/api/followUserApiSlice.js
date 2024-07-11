@@ -42,4 +42,5 @@ export const {
   useGetFollowUserQuery,
   useDeleteFollowUserMutation,
   useSendMailServiceMutation,
+  useSendWhatsappServiceMutation,
 } = followUserApiSlice;

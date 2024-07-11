@@ -1,0 +1,163 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proposal Document</title>
+    <style>
+      /* Reset and base styles */ body, html { margin: 0; padding: 0;
+      font-family: Arial, sans-serif; } /* Utilities */ .px-5 { padding-left:
+      1.25rem; /* Equivalent to Tailwind's px-5 */ padding-right: 1.25rem; /*
+      Equivalent to Tailwind's px-5 */ } .md\:px-1 { padding-left: 0.25rem; /*
+      Equivalent to Tailwind's md:px-1 */ padding-right: 0.25rem; /* Equivalent
+      to Tailwind's md:px-1 */ } .mb-6 { margin-bottom: 1.5rem; /* Equivalent to
+      Tailwind's mb-6 */ } .mt-2 { margin-top: 0.5rem; /* Equivalent to
+      Tailwind's mt-2 */ } .flex { display: flex; /* Equivalent to Tailwind's
+      flex */ } .justify-between { justify-content: space-between; /* Equivalent
+      to Tailwind's justify-between */ } /* Typography */ .font-bold {
+      font-weight: 700; /* Equivalent to Tailwind's font-bold */ } .text-xl {
+      font-size: 1.25rem; /* Equivalent to Tailwind's text-xl */ }
+      .text-blue-700 { color: #4a90e2; /* Equivalent to Tailwind's text-blue-700
+      */ } /* Layout and Box Model */ .w-full { width: 100%; /* Equivalent to
+      Tailwind's w-full */ } .p-5 { padding: 1.25rem; /* Equivalent to
+      Tailwind's p-5 */ } .py-4 { padding-top: 1rem; /* Equivalent to Tailwind's
+      py-4 */ padding-bottom: 1rem; /* Equivalent to Tailwind's py-4 */ } /*
+      Borders */ .border-solid { border-style: solid; /* Equivalent to
+      Tailwind's border-solid */ } .border-b-2 { border-bottom-width: 2px; /*
+      Equivalent to Tailwind's border-b-2 */ } .border-black-300 { border-color:
+      #d1d5db; /* Equivalent to Tailwind's border-black-300 */ } /* Colors */
+      .bg-white { background-color: #ffffff; /* Equivalent to Tailwind's
+      bg-white */ } .bg-slate-700 { background-color: #4a5568; /* Equivalent to
+      Tailwind's bg-slate-700 */ } /* Shadows */ .shadow-md { box-shadow: 0px
+      4px 14px rgba(0, 0, 0, 0.1); /* Equivalent to Tailwind's shadow-md */ } /*
+      Text Alignment */ .text-left { text-align: left; /* Equivalent to
+      Tailwind's text-left */ } .text-right { text-align: right; /* Equivalent
+      to Tailwind's text-right */ } /* Tables */ .table { display: table; /*
+      Equivalent to Tailwind's table */ width: 100%; /* Equivalent to Tailwind's
+      w-full */ border-collapse: collapse; } /* Table Rows and Cells */
+      .table-row { display: table-row; /* Equivalent to Tailwind's table-row */
+      } .table-cell { display: table-cell; /* Equivalent to Tailwind's
+      table-cell */ padding: 0.75rem; /* Adjust as needed */ border-bottom: 2px
+      solid #e5e7eb; /* Adjust as needed */ } /* Typography */ .text-xl {
+      font-size: 1.25rem; /* Equivalent to Tailwind's text-xl */ line-height:
+      1.75rem; /* Adjust as needed */ } /* Font Weight */ .font-light {
+      font-weight: 300; /* Equivalent to Tailwind's font-light */ } /*
+      Responsive Breakpoints */ @media (min-width: 768px) { .md\:px-1 {
+      padding-left: 0.5rem; /* Adjust as needed */ padding-right: 0.5rem; /*
+      Adjust as needed */ } .gap-10 { gap: 2.5rem; /* Adjust as needed */ }
+      .text-2xl { font-size: 1.5rem; /* Adjust as needed */ line-height: 2rem;
+      /* Adjust as needed */ } } .text-white{ color: white; }
+
+    </style>
+  </head>
+  <body>
+    <div class="px-5">
+      <div class="w-full md:px-1 px-0 mb-6">
+        <div class="flex justify-between mb-4 mt-2">
+          <h1 class="px-5 font-bold">Proposal Details</h1>
+        </div>
+        {{#if data}}
+          <div class="bg-white px-2 md:px-4 py-7 shadow-md rounded">
+            <div
+              class="overflow-x-auto flex justify-between items-center border-solid border-b-2 border-black-300 pb-5"
+            >
+              <p class="px-5 font-bold">Proposal ID : {{data.proposalId}}</p>
+            </div>
+            <div class="p-5 border-solid border-b-2 border-black-300 pb-5">
+              <div class="text-xl py-5">
+                Company Name :
+                <span class="font-bold">{{data.leadId.companyName}}</span>
+              </div>
+              <div class="flex gap-10">
+                <div>
+                  <h2 class="font-bold text-2xl py-4 text-blue-700">Company
+                    Details</h2>
+                  <p><span class="font-bold">Customer Name :</span>
+                    {{data.leadId.customerName}}</p>
+                  <p><span class="font-bold">Date :</span>
+                    {{formatDate data.leadId.createdAt}}</p>
+                  <p><span class="font-bold">Status :</span> {{data.status}}</p>
+                  <p><span class="font-bold">Address :</span>
+                    {{data.leadId.address}}</p>
+                  <p><span class="font-bold">Phone No :</span>
+                    {{data.leadId.phone}}</p>
+                  <p><span class="font-bold">Email Id :</span>
+                    {{data.leadId.email}}</p>
+                  <p><span class="font-bold">City :</span>
+                    {{data.leadId.city}}</p>
+                  <p><span class="font-bold">State :</span>
+                    {{data.leadId.state}}</p>
+                  <p><span class="font-bold">Country :</span>
+                    {{data.leadId.country}}</p>
+                  <p><span class="font-bold">Created By :</span>
+                    {{formatDate data.leadId.createdAt}}</p>
+                  <p><span class="font-bold">Updated By :</span>
+                    {{formatDate data.leadId.updatedAt}}</p>
+                </div>
+                <div>
+                  <h2 class="font-bold text-2xl py-4 text-blue-700">Proposal
+                    Details</h2>
+                  <p><span class="font-bold">Subject :</span>
+                    {{data.proposalSubject}}</p>
+                  <p><span class="font-bold">Payment Term :</span>
+                    {{data.paymentTerm}}</p>
+                  <p><span class="font-bold">Delivery Term :</span>
+                    {{data.deliveryTerm}}</p>
+                  <p><span class="font-bold">Quotation Validity :</span>
+                    {{data.validity}}</p>
+                  <p><span class="font-bold">Remarks :</span>
+                    {{data.remarks}}</p>
+                  <p><span class="font-bold">A/C Manager :</span>
+                    {{data.accountManager}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white px-2 md:px-4 py-4 shadow-md rounded mt-5">
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead
+                  class="border-solid border-b-2 border-black-300 bg-slate-700"
+                >
+                  <tr class="text-black text-left text-lg text-white">
+                    <th class="py-2 px-5">Product</th>
+                    <th class="py-2 px-5">Qty</th>
+                    <th class="py-2 px-5">Rate</th>
+                    <th class="py-2 px-5">Total</th>
+                    <th class="py-2 px-5">GST Value</th>
+                    <th class="py-2 px-5 text-right">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each data.products}}
+                    <tr
+                      class="text-black text-left font-light border-solid border-b-2 border-black-300"
+                    >
+                      <td class="py-2 px-5">{{this.productId.name}}</td>
+                      <td class="py-2 px-5">{{this.quantity}}</td>
+                      <td class="py-2 px-5">{{this.productId.price}}</td>
+                      <td class="py-2 px-5">{{multiply
+                          this.productId.price
+                          this.quantity
+                        }}</td>
+                      <td class="py-2 px-5">{{this.productId.gst}}</td>
+                      <td class="py-2 px-5 text-right">{{add
+                          (multiply this.productId.price this.quantity)
+                          this.productId.gst
+                        }}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <div
+                class="border-solid border-b-2 border-black-300 font-bold flex justify-between px-4 py-2 text-xl w-full"
+              >
+                <p>Total</p>
+                <p>{{data.totalAmount}}</p>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </body>
+</html>

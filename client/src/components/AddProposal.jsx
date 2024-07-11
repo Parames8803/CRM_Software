@@ -74,7 +74,7 @@ const AddProposal = ({ open, setOpen }) => {
         <div className="text-2xl font-bold text-gray-700">Add New Proposal</div>
         <Button
           label={"Back"}
-          className={"bg-gray-800 text-white px-5 rounded-lg"}
+          className={"bg-cyan-600 text-white px-5"}
           onClick={() => {
             window.history.back();
           }}

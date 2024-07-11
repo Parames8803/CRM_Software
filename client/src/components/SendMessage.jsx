@@ -4,6 +4,7 @@ import { Dialog } from "@headlessui/react";
 import { MdOutlineCancel } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { SiGmail } from "react-icons/si";
+import gmailSvg from "../assets/icongmail.svg";
 import Textbox from "./Textbox";
 import TextArea from "./TextArea";
 import Button from "./Button";
@@ -50,12 +51,10 @@ const SendMessage = ({ open, setOpen, handler, data }) => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Dialog.Title
               as="h2"
-              className="text-2xl font-bold leading-6 text-gray-900 mb-4 flex justify-center items-center gap-5"
+              className="text-2xl font-bold leading-6 text-gray-800 mb-4 flex justify-center items-center gap-5"
             >
-              Send Email
-              <span>
-                <SiGmail className="text-blue-800"/>
-              </span>
+              <img src={gmailSvg} alt="gmail" className="w-7" />
+              <p>Send Gmail</p>
             </Dialog.Title>
             <div className=" flex flex-col gap-6">
               <Textbox

@@ -33,6 +33,14 @@ const proposalApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    toggleProposalStatus: builder.mutation({
+      query: (data) => ({
+        url: `${PROPOSAL_URL}/switch`,
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -41,4 +49,5 @@ export const {
   useGetProposalByIdQuery,
   useGetProposalsQuery,
   useDeleteProposalMutation,
+  useToggleProposalStatusMutation,
 } = proposalApiSlice;

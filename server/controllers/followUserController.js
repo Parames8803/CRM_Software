@@ -31,9 +31,7 @@ export const followUserController = {
 
   getAll: async (req, res) => {
     try {
-      const users = await FollowUser.find({ deletedAt: null }).select(
-        "name email phone interest"
-      );
+      const users = await FollowUser.find({ deletedAt: null });
       res.status(200).json(users.length > 0 ? users : []);
     } catch (error) {
       console.log(error);

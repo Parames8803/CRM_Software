@@ -152,9 +152,9 @@ const Table = ({ tasks }) => {
   );
   return (
     <>
-      <div className="bg-white  px-2 md:px-4 pt-4 pb-9 shadow-md rounded">
+      <div className="bg-white  px-2 md:px-4 pt-4 pb-9 shadow-md rounded h-96">
         <div className="overflow-x-auto">
-          <table className="w-full ">
+          <table className="w-full">
             <TableHeader />
             <tbody>
               {tasks.map((task, index) => (

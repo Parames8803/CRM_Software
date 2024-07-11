@@ -200,7 +200,12 @@ export const dashboardStatistics = async (req, res) => {
 export const getTasks = async (req, res) => {
   try {
     const { stage, isTrashed } = req.query;
-    let query = { isTrashed: isTrashed ? true : false };
+    const { userId } = req.user;
+
+    let query = {
+      isTrashed: isTrashed ? true : false,
+      $or: [{ team: userId }],
+    };
     if (stage) {
       query.stage = stage;
     }

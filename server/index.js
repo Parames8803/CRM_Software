@@ -8,7 +8,6 @@ import routes from "./routes/index.js";
 import { dbConnection } from "./utils/index.js";
 
 dotenv.config();
-
 dbConnection();
 
 const PORT = process.env.PORT || 5000;

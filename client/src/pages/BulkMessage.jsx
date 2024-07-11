@@ -13,6 +13,9 @@ import { toast } from "sonner";
 import SendMessage from "../components/SendMessage";
 import Button from "../components/Button";
 import Loading from "../components/Loader";
+import gmailSvg from "../assets/icongmail.svg";
+import { dateFormatter, getInitials } from "../utils/index.js";
+import Title from "../components/Title";
 
 const BulkMessage = () => {
   const [file, setFile] = useState(null);
@@ -64,9 +67,7 @@ const BulkMessage = () => {
     setEmails([user]);
   };
 
-  const handleWhatsappService = async (user) => {
-    console.log(user);
-  };
+  const handleWhatsappService = async (user) => {};
 
   const fetchData = async () => {
     try {
@@ -91,12 +92,10 @@ const BulkMessage = () => {
   }
 
   return (
-    <div className="px-5">
+    <div className="px-2">
       <>
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold text-gray-800 w-full">
-            Send Bulk Messages
-          </div>
+          <Title title="Follow Users" className={"w-full"} />
           <div className="py-6 w-full">
             <form
               action=""
@@ -113,7 +112,7 @@ const BulkMessage = () => {
               <Button
                 icon={<FaCloudUploadAlt />}
                 className={
-                  "text-white bg-gray-800 rounded-lg flex justify-center items-center gap-4"
+                  "text-white bg-cyan-600 flex justify-center items-center gap-4"
                 }
                 type={"submit"}
                 label={"Upload"}
@@ -122,45 +121,49 @@ const BulkMessage = () => {
           </div>
         </div>
         {data.length > 0 ? (
-          <div>
-            <table className="bg-white w-full shadow-md rounded">
-              <thead className="bg-slate-700 text-white">
+          <div className="p-5 bg-white shadow-md">
+            <table className="bg-white w-full">
+              <thead className="text-black-600 border-b bg-red-300">
                 <tr>
-                  <th className="py-3 text-lg">S.no</th>
-                  <th className="py-3 text-lg">Name</th>
-                  <th className="py-3 text-lg">Phone</th>
-                  <th className="py-3 text-lg">Email</th>
-                  <th className="py-3 text-lg">Actions</th>
+                  <th className="py-3 text-md text-left px-8">Full Name</th>
+                  <th className="py-3 text-md">Phone</th>
+                  <th className="py-3 text-md">Email</th>
+                  <th className="py-3 text-md">Date</th>
+                  <th className="py-3 text-md text-center">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {data.map((item, index) => (
                   <tr
                     key={index}
-                    className="text-black border-solid border-b-2 border-black-300"
+                    className="text-gray-600 text-md border-solid border-b-2 border-black-300"
                   >
-                    <td className="py-3 px-5 text-center">{index + 1}</td>
-                    <td className="py-3 px-5 text-center">{item.name}</td>
+                    <td className="py-4 px-8 text-left flex items-center gap-5">
+                      <div className="w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-blue-700">
+                        <span className="text-xs md:text-sm text-center">
+                          {getInitials(item.name)}
+                        </span>
+                      </div>
+                      {item.name}
+                    </td>
                     <td className="py-3 px-5 text-center">{item.phone}</td>
                     <td className="py-3 px-5 text-center">{item.email}</td>
-                    <td className="py-3 px-5 text-center text-sm flex justify-around items-center">
-                      <IoLogoWhatsapp
-                        className="text-green-500 cursor-pointer"
-                        onClick={() => {
-                          handleWhatsappService(item);
-                        }}
-                      />
-                      <SiGmail
-                        className="text-red-500 cursor-pointer"
+                    <td className="py-3 px-5 text-center">
+                      {dateFormatter(item.createdAt)}
+                    </td>
+                    <td className="py-3 px-5 text-right flex justify-around items-center">
+                      <img
+                        src={gmailSvg}
+                        alt="gmail"
+                        className="text-red-500 cursor-pointer w-5"
                         onClick={() => {
                           handleGmailService(item);
                         }}
                       />
                       <MdDelete
-                        className="text-black-600 text-2xl cursor-pointer"
-                        onClick={() => {
-                          handleDeleteUser(item);
-                        }}
+                        className="text-red-600 text-xl hover:text-red-500 font-semibold sm:px-0"
+                        type="button"
+                        onClick={() => handleDeleteUser(item)}
                       />
                     </td>
                   </tr>
@@ -177,7 +180,7 @@ const BulkMessage = () => {
           <Button
             icon={<FaCloudUploadAlt />}
             className={
-              "flex gap-5 items-center justify-between text-white bg-gray-800 rounded-lg w-fit my-8"
+              "flex gap-5 items-center justify-between text-white bg-cyan-600 w-fit my-8"
             }
             type={"submit"}
             label={"Send Bulk Email"}
