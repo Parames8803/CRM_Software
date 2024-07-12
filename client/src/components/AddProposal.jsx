@@ -10,7 +10,7 @@ import Loading from "./Loader";
 import { useCreateProposalMutation } from "../redux/slices/api/proposalApiSlice";
 import { toast } from "sonner";
 
-const AddProposal = ({ open, setOpen }) => {
+const AddProposal = () => {
   const {
     register,
     handleSubmit,
@@ -53,9 +53,8 @@ const AddProposal = ({ open, setOpen }) => {
       delivery,
     };
     const res = await proposalData(formData).unwrap();
-    if (res.status === true) {
+    if (res.status) {
       toast.success("Proposal created Success");
-      window.location.reload();
     }
   };
 
