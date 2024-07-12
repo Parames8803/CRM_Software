@@ -30,7 +30,6 @@ export const createProposal = async (req, res) => {
       companyName: companyName.toLowerCase(),
       deletedAt: null,
     });
-    console.log(leadData);
     if (leadData) {
       return res.status(400).json({ message: "Lead already exists" });
     }
@@ -61,7 +60,6 @@ export const createProposal = async (req, res) => {
       remarks,
       accountManager,
       leadId: lead._id,
-      status: "Open",
     });
 
     await Lead.updateOne(

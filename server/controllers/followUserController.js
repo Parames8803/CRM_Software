@@ -7,7 +7,10 @@ export const followUserController = {
       const data = req.body;
       const createdUsers = [];
       for (let x of data) {
-        let user = await FollowUser.findOne({ email: x.Email });
+        let user = await FollowUser.findOne({
+          email: x.Email,
+          deletedAt: null,
+        });
         if (!user) {
           const user = await FollowUser.create({
             name: x.Name,
