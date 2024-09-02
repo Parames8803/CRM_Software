@@ -113,6 +113,3 @@ First, create the environment variables file `.env` in the client folder. The `.
 3. Run `npm start` to run the app on `http://localhost:3000`.
 4. Open [http://localhost:3000] to view it in your browser.
 
-
-## firebase account and mongoAtlas Cloud DB
-parameswaran8803@gmail.com - Google
