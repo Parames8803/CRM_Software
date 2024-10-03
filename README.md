@@ -1,5 +1,3 @@
-# Team Management (MERN)
-
 ### 
 ## **Admin Features:**
 1. **User Management:**
